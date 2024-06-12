@@ -21,8 +21,8 @@ fastify.addHook('onSend', Hooks.onSend);
 
  const start = async () => {
   try {
-    await fastify.listen(3001);
-    console.log('Server listening at http://localhost:3001');
+    await fastify.listen(3000);
+    console.log('Server listening at http://localhost:3000');
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
