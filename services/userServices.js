@@ -1,10 +1,25 @@
  const User = require('../models/userModel');
+ const UserRole = require('../models/userRoleModel');
 
- 
-exports.getAllUsers = async () => {
-  const users = await User.findAll();
-  return users;
-};
+ exports.getAllUsers = async () => {
+  try {
+    console.log('Fetching all users...');
+    const users = await User.findAll({
+      include: [{
+        model: UserRole,
+        attributes: ['id','role'] 
+      }],
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt','roleId'
+      ] }  
+    });
+    console.log('Users fetched successfully:', users);
+    return users;
+  } catch (error) {
+    console.error('Error fetching users:', error.message);
+    console.error('Stack trace:', error.stack);
+    throw error;  
+  }
+}
 
 exports.getUserById = async (id) => {
     const foundUser = await User.findByPk(id); 

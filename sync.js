@@ -1,7 +1,7 @@
 const sequelize = require('./config/sequelize');
-const User = require('./models/userModel');
-const bcrypt = require('bcrypt');
-
+const { User, UserRole } = require('./models/initializeModels');
+ const bcrypt = require('bcrypt');
+ 
 const syncDatabase = async () => {
   try {
     await sequelize.authenticate();
@@ -11,13 +11,17 @@ const syncDatabase = async () => {
     console.log('All models were synchronized successfully.');
 
     const hashedPassword = await bcrypt.hash("admin", 10);
+    await UserRole.create({ role: 'superAdmin' });
+
     await User.create({ 
       firstName: 'Abdur', 
       lastName: 'Razzak', 
       email: 'razzak@gmail.com', 
       password: hashedPassword, 
-      role: "superAdmin" 
-    });
+      roleId: 1
+     });
+
+
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   } finally {

@@ -53,16 +53,17 @@ exports.getUserById = async (request, res) => {
 
 exports.createUser = async (request, res) => {
   try {
-    const { firstName, lastName, email, password } = request.body;
-    if (!firstName || !lastName || !email || !password) {
+    const { firstName, lastName, email, password,roleId } = request.body;
+    if (!firstName || !lastName || !email || !password|| !roleId) {
       res.status(400).send({
         status: 'error',
         statusCode: 400,
         message: 'All fields are required'
-
        });
       return;
     }
+
+    
     const existingUser = await userService.findUserByEmail(email);
     if (existingUser) {
       res.status(400).send({ 
@@ -72,14 +73,15 @@ exports.createUser = async (request, res) => {
        });
       return;
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await userService.createUser(
       { 
         firstName,
         lastName, email,
         password: hashedPassword,
-        role: "admin"
-       }
+        roleId: roleId
+        }
     );
     res.status(201).send({
       status: 'success',

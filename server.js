@@ -1,6 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const roleRoutes = require('./routes/userRoleRoutes');
 const { errorHandler } = require('./utils/errorHandler');
 const Hooks = require('./hooks');
 fastify.addHook('onRequest', Hooks.onRequest);
@@ -13,6 +14,7 @@ fastify.addHook('onSend', Hooks.onSend);
 
 
  fastify.register(userRoutes,authRoutes);
+  fastify.register(roleRoutes);
  fastify.register(require('fastify-jwt'), {
   secret: 'supersecretkey' 
 });
