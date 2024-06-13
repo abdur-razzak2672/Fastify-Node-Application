@@ -1,6 +1,5 @@
 const userService = require('../services/userServices');
-const fastify = require('fastify')({ logger: true });
-const bcrypt = require('bcrypt');
+ const bcrypt = require('bcrypt');
 
 
 exports.getUsers = async (request, res) => {

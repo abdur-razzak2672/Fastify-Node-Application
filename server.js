@@ -2,15 +2,20 @@ const fastify = require('fastify')({ logger: true });
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const roleRoutes = require('./routes/userRoleRoutes');
+const blogRoutes = require('./routes/blogRoutes');
 const { errorHandler } = require('./utils/errorHandler');
 const Hooks = require('./hooks');
+const path = require('path');
 
+ 
+fastify.register(require('@fastify/multipart'));
 fastify.register(require('@fastify/jwt'), {
   secret: 'supersecret'
 });
 fastify.register(userRoutes, { prefix: '/api/v1' });
 fastify.register(authRoutes, { prefix: '/api/v1' });
 fastify.register(roleRoutes, { prefix: '/api/v1' });
+fastify.register(blogRoutes, { prefix: '/api/v1' });
 
 // Set error handler
 fastify.setErrorHandler(errorHandler);
