@@ -7,7 +7,7 @@ async function onRequest(request, reply) {
   
   async function preHandler(request, reply) {
     console.log(`preHandler request for ${request.url}`);
-    if (request.url !== '/api/v1/register' && request.url !== '/api/v1/login' && request.url !== '/api/v1/users') {
+    if (request.url !== '/api/v1/register' && request.url !== '/api/v1/login' && request.url !== '/api/v1/users', request.url !== '/api/v1/blogs') {
       try {
         await request.jwtVerify();
       } catch (err) {
@@ -17,7 +17,6 @@ async function onRequest(request, reply) {
     }
     console.log(`Request body: ${JSON.stringify(request.body)}`);
   }
-  
   async function onResponse(request, reply) {
     console.log(`response request for ${request.url}`);
     console.log(`Request method: ${request.method}`);
