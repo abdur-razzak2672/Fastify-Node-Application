@@ -1,12 +1,12 @@
 
 const userRoleController = require('../controllers/userRoleControllers');
+const roleMiddleware = require('../middlewares/roleMiddleware');
+
 
 async function roleRoutes(fastify,option){
-    fastify.get('/roles',userRoleController.getAllRoles);
-    // fastify.get('/roles/:id',userRoleController.getRoleById);
-      fastify.post('/roles',userRoleController.createUserRole);
-    // fastify.put('/roles/:id',userRoleController.updateRole);
-     fastify.delete('/roles/:id',userRoleController.deleteRole);
+  fastify.get('/roles', { preHandler: roleMiddleware(['superAdmin', 'admin', 'user']) }, userRoleController.getAllRoles);
+  fastify.post('/roles', { preHandler: roleMiddleware(['superAdmin', 'admin']) }, userRoleController.createUserRole);
+  fastify.delete('/roles/:id', { preHandler: roleMiddleware(['superAdmin']) }, userRoleController.deleteRole);
 }
 
 module.exports = roleRoutes;

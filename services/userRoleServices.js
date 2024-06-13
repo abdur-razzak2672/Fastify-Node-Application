@@ -16,3 +16,8 @@ exports.deleteRole = async (id) => {
     await role.destroy();
     return true;
 }
+
+exports.exsistingRole = async (role) => {
+    const existingRole = await UserRole.findOne({ where: { role } });
+    return existingRole;
+}

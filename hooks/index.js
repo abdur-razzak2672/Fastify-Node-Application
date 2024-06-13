@@ -7,7 +7,7 @@ async function onRequest(request, reply) {
   
   async function preHandler(request, reply) {
     console.log(`preHandler request for ${request.url}`);
-    if (request.url !== '/register' && request.url !== '/login' && request.url !== '/users') {
+    if (request.url !== '/api/v1/register' && request.url !== '/api/v1/login' && request.url !== '/api/v1/users') {
       try {
         await request.jwtVerify();
       } catch (err) {

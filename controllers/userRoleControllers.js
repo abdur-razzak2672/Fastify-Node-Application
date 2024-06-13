@@ -1,6 +1,6 @@
 const roleService = require('../services/userRoleServices');
 
-async function getAllRoles(req, reply){
+async function getAllRoles(req, reply) {
     try {
         const roles = await roleService.getAllUserRoles();
         reply.status(200).send({
@@ -17,7 +17,7 @@ async function getAllRoles(req, reply){
     }
 }
 
-async function createUserRole(req, reply){
+async function createUserRole(req, reply) {
     try {
         const { role } = req.body;
         if (!role) {
@@ -28,6 +28,18 @@ async function createUserRole(req, reply){
             });
             return;
         }
+
+        const existingRole = await roleService.exsistingRole(role);
+        if (existingRole) {
+            reply.status(400).send({
+                status: 'error',
+                statusCode: 400,
+                message: 'Role already exists'
+            });
+            return;
+        }
+
+
         const newRole = await roleService.createUserRole({ role });
         reply.status(201).send({
             status: 'success',
@@ -44,10 +56,18 @@ async function createUserRole(req, reply){
     }
 }
 
-async function deleteRole(req, reply){
+async function deleteRole(req, reply) {
     try {
         const { id } = req.params;
         const role = await roleService.deleteRole(id);
+        if (!role) {
+            reply.status(404).send({
+                status: 'error',
+                statusCode: 404,
+                message: 'Role not found'
+            });
+            return;
+        }
         reply.status(200).send({
             status: 'success',
             statusCode: 200,
@@ -62,9 +82,6 @@ async function deleteRole(req, reply){
         });
     }
 }
-
-
-
 
 module.exports = {
     getAllRoles,

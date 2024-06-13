@@ -22,8 +22,20 @@
 }
 
 exports.getUserById = async (id) => {
-    const foundUser = await User.findByPk(id); 
+    // const foundUser = await User.findByPk(id); 
+    // return foundUser;
+
+    const foundUser = await User.findByPk(id, {
+      include: [{
+        model: UserRole,
+        attributes: ['id', 'role']
+      }],
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'roleId'] }
+    });
+
+
     return foundUser;
+
   };
 exports.createUser = async (userData) => {
   const createdUser = await User.create(userData);

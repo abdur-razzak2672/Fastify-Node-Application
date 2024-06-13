@@ -3,8 +3,6 @@ const Hooks = require('../hooks');
 
 
 async function routes(fastify, options) {
-
-  
   fastify.get('/users', userController.getUsers);
   fastify.get('/users/:id', userController.getUserById);
   fastify.post('/users', userController.createUser);

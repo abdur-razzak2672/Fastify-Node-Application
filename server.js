@@ -4,6 +4,16 @@ const authRoutes = require('./routes/authRoutes');
 const roleRoutes = require('./routes/userRoleRoutes');
 const { errorHandler } = require('./utils/errorHandler');
 const Hooks = require('./hooks');
+
+fastify.register(require('@fastify/jwt'), {
+  secret: 'supersecret'
+});
+fastify.register(userRoutes, { prefix: '/api/v1' });
+fastify.register(authRoutes, { prefix: '/api/v1' });
+fastify.register(roleRoutes, { prefix: '/api/v1' });
+
+// Set error handler
+fastify.setErrorHandler(errorHandler);
 fastify.addHook('onRequest', Hooks.onRequest);
 fastify.addHook('preHandler', Hooks.preHandler);
 fastify.addHook('onResponse', Hooks.onResponse);
@@ -13,11 +23,7 @@ fastify.addHook('onError', Hooks.onError);
 fastify.addHook('onSend', Hooks.onSend);
 
 
- fastify.register(userRoutes,authRoutes);
-  fastify.register(roleRoutes);
- fastify.register(require('fastify-jwt'), {
-  secret: 'supersecretkey' 
-});
+
 
  fastify.setErrorHandler(errorHandler);
 

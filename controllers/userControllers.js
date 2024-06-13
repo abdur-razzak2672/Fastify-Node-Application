@@ -11,7 +11,6 @@ exports.getUsers = async (request, res) => {
       statusCode: 200,
       message: 'Users fetched successfully',
       data: users
-    
     });
   } catch (error) {
     res.status(500).send({ 
@@ -63,7 +62,7 @@ exports.createUser = async (request, res) => {
       return;
     }
 
-    
+
     const existingUser = await userService.findUserByEmail(email);
     if (existingUser) {
       res.status(400).send({ 
