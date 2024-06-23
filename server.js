@@ -42,4 +42,3 @@ fastify.addHook('onSend', Hooks.onSend);
   }
 };
 start();
-///fdgfgdfgdfgdfgf
