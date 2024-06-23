@@ -42,6 +42,4 @@ fastify.addHook('onSend', Hooks.onSend);
   }
 };
 start();
-
-// new commit to chk revert
-// back with reset
+// check reset password
