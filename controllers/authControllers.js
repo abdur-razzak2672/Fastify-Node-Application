@@ -5,8 +5,9 @@ const userService = require('../services/userServices');
 
 exports.register = async (request, res) => {
   try {
-    const { firstName, lastName, email, password } = request.body;
-    if (!firstName || !lastName || !email || !password) {
+    const { firstName, lastName, email, password,roleId } = request.body;
+    
+    if (!firstName || !lastName || !email || !password || !roleId) {
       res.status(400).send({
         status: 'error',
         statusCode: 400,
@@ -24,12 +25,14 @@ exports.register = async (request, res) => {
       return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",roleId)
     const newUser = await authServices.registerUser(
       {
         firstName,
-        lastName, email,
+        lastName, 
+        email,
         password: hashedPassword,
-        role: "admin"
+        roleId
       }
     );
     res.status(201).send({

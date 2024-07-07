@@ -19,13 +19,8 @@ fastify.register(blogRoutes, { prefix: '/api/v1' });
 
 // Set error handler
 fastify.setErrorHandler(errorHandler);
-fastify.addHook('onRequest', Hooks.onRequest);
-fastify.addHook('preHandler', Hooks.preHandler);
-fastify.addHook('onResponse', Hooks.onResponse);
-fastify.addHook('preSerialization', Hooks.preSerialization);
-fastify.addHook('preParsing', Hooks.preParsing);
-fastify.addHook('onError', Hooks.onError);
-fastify.addHook('onSend', Hooks.onSend);
+ fastify.addHook('preHandler', Hooks.preHandler);
+
 
 
 
