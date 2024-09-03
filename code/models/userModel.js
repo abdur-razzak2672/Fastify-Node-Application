@@ -27,6 +27,7 @@ const User = sequelize.define('User', {
       key: 'id',
     },
   },
+  
 });
 
 User.belongsTo(UserRole, { foreignKey: 'roleId' });

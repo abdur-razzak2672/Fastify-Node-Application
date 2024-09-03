@@ -42,7 +42,9 @@ exports.createUser = async (userData) => {
   return createdUser;
 };
 exports.findUserByEmail = async (email) => {
+ 
   const user = await User.findOne({ where: { email } });
+ 
   return user;
 };
 

@@ -24,21 +24,16 @@ fastify.register(blogRoutes, { prefix: '/api/v1' });
 fastify.get('/', async (request, reply) => {
   console.log('api work8797689876');
  });
-// Set error handler
-fastify.setErrorHandler(errorHandler);
+ 
+ fastify.setErrorHandler(errorHandler);
  fastify.addHook('preHandler', Hooks.preHandler);
-
-
-
-
-
  fastify.setErrorHandler(errorHandler);
 
- 
+const port = 5000
 const start = async () => {
   try {
-    await fastify.listen(5000, '0.0.0.0');
-    console.log('Server listening at http://localhost:5000jhjjhjhjjkjj');
+    await fastify.listen(port, '0.0.0.0');
+    console.log('Server listening at http://localhost :',port);
     console.log("hello world");
   } catch (err) {
     fastify.log.error(err);
@@ -47,5 +42,4 @@ const start = async () => {
 };
 start();
 
-// new commit to chk revert
-// back with reset
+ 

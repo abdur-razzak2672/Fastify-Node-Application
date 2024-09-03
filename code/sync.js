@@ -1,8 +1,8 @@
+require('dotenv').config();
 const sequelize = require('./config/sequelize');
 const { User, UserRole } = require('./models/initializeModels');
 const Blog = require('./models/blogModel');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
 
 
 const syncDatabase = async () => {
@@ -10,19 +10,16 @@ const syncDatabase = async () => {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
 
-    // Synchronize models without dropping existing tables
-    await sequelize.sync();
+     await sequelize.sync();
 
     console.log('All models were synchronized successfully.');
 
-    // Check if UserRole with 'superAdmin' role exists
-    const existingRole = await UserRole.findOne({ where: { role: 'superAdmin' } });
+     const existingRole = await UserRole.findOne({ where: { role: 'superAdmin' } });
     if (!existingRole) {
       await UserRole.create({ role: 'superAdmin' });
     }
 
-    // Check if user with email 'razzak@gmail.com' exists
-    const existingUser = await User.findOne({ where: { email: 'razzak@gmail.com' } });
+     const existingUser = await User.findOne({ where: { email: 'razzak@gmail.com' } });
     if (!existingUser) {
       const hashedPassword = await bcrypt.hash("admin", 10);
       await User.create({
@@ -41,9 +38,6 @@ const syncDatabase = async () => {
       author : 'Abdur Razzak',
       views : 0,
      });
-
-
-
 
   } catch (error) {
     console.error('Unable to connect to the database:', error);

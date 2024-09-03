@@ -15,7 +15,9 @@ exports.register = async (request, res) => {
       });
       return;
     }
+
     const existingUser = await userService.findUserByEmail(email);
+ 
     if (existingUser) {
       res.status(400).send({
         status: 'error',
@@ -24,9 +26,9 @@ exports.register = async (request, res) => {
       });
       return;
     }
+ 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",roleId)
-    const newUser = await authServices.registerUser(
+     const newUser = await authServices.registerUser(
       {
         firstName,
         lastName, 
