@@ -8,7 +8,7 @@ const Hooks = require('./hooks');
 const path = require('path');
 
 
-console.log("dhnbfsnfbdnfbdfnbf")
+console.log("Abdur Razzak")
  
 fastify.register(require('@fastify/multipart'));
 fastify.register(require('@fastify/jwt'), {

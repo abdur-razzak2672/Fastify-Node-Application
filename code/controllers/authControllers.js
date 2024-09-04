@@ -5,8 +5,7 @@ const userService = require('../services/userServices');
 
 exports.register = async (request, res) => {
   try {
-    const { firstName, lastName, email, password,roleId } = request.body;
-    
+    const { firstName, lastName, email, password, roleId } = request.body;
     if (!firstName || !lastName || !email || !password || !roleId) {
       res.status(400).send({
         status: 'error',
@@ -15,9 +14,7 @@ exports.register = async (request, res) => {
       });
       return;
     }
-
     const existingUser = await userService.findUserByEmail(email);
- 
     if (existingUser) {
       res.status(400).send({
         status: 'error',
@@ -26,12 +23,14 @@ exports.register = async (request, res) => {
       });
       return;
     }
- 
+
+
+    
     const hashedPassword = await bcrypt.hash(password, 10);
-     const newUser = await authServices.registerUser(
+    const newUser = await authServices.registerUser(
       {
         firstName,
-        lastName, 
+        lastName,
         email,
         password: hashedPassword,
         roleId

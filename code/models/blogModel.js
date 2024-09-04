@@ -1,7 +1,6 @@
-// bloge attribute is image, title ,description,author,views and date
-
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
+
 
 const Blog = sequelize.define('Blog', {
     image: {
@@ -25,5 +24,6 @@ const Blog = sequelize.define('Blog', {
         allowNull: false,
     },
 });
+
 
 module.exports = Blog;

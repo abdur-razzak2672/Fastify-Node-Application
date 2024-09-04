@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./code:/app
+      - /app/node_modules  # Prevents overwriting node_modules
     ports:
       - "5000:5000"
     depends_on:
@@ -19,10 +20,7 @@ services:
       DB_NAME: fastify
     networks:
       - my-network  
-    command: >
-      sh -c "
-       npm run dev
-      " 
+    command: npm run dev
 
   db:
     image: postgres:latest
@@ -34,6 +32,25 @@ services:
       - my-network   
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  sync:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./code:/app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db   
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: fastify
+    networks:
+      - my-network
+    command: >
+      node /app/sync.js
 
 networks:
   my-network:

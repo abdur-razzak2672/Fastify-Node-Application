@@ -17,6 +17,7 @@ async function getAllRoles(req, reply) {
     }
 }
 
+
 async function createUserRole(req, reply) {
     try {
         const { role } = req.body;
@@ -28,7 +29,6 @@ async function createUserRole(req, reply) {
             });
             return;
         }
-
         const existingRole = await roleService.exsistingRole(role);
         if (existingRole) {
             reply.status(400).send({
@@ -38,8 +38,6 @@ async function createUserRole(req, reply) {
             });
             return;
         }
-
-
         const newRole = await roleService.createUserRole({ role });
         reply.status(201).send({
             status: 'success',
@@ -55,6 +53,8 @@ async function createUserRole(req, reply) {
         });
     }
 }
+
+
 
 async function deleteRole(req, reply) {
     try {
@@ -82,6 +82,7 @@ async function deleteRole(req, reply) {
         });
     }
 }
+
 
 module.exports = {
     getAllRoles,

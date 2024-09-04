@@ -1,4 +1,4 @@
-const blogService = require ('../services/blogServices');
+const blogService = require('../services/blogServices');
 
 async function getBlogs(request, reply) {
     try {
@@ -18,20 +18,18 @@ async function getBlogs(request, reply) {
     }
 }
 
-async function createBlogs (request, reply){
+async function createBlogs(request, reply) {
     try {
         await blogService.uploadImage(request, reply);
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         reply.status(500).send({
-          status: 'error',
-          statusCode: 500,
-          message: 'Internal Server Error',
+            status: 'error',
+            statusCode: 500,
+            message: 'Internal Server Error',
         });
-      }
-
+    }
 }
-
 
 
 module.exports = {

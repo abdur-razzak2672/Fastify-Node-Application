@@ -1,13 +1,10 @@
 
   
- async function preHandler(request, reply) {
-  console.log(`PreHandler request for ${request.url}`);
-  
+ async function preHandler(request, reply) {  
    if (request.url !== '/api/v1/register' && 
       request.url !== '/api/v1/login' && 
       request.url !== '/api/v1/users' &&
       request.url !== '/api/v1/blogs') {
-    
     try {
       await request.jwtVerify();
     } catch (err) {
@@ -15,9 +12,9 @@
       return;
     }
   }
-  
-  console.log(`Request body: ${JSON.stringify(request.body)}`);
 }
+
+
 
 // async function onRequest(request, reply) {
 //   console.log(`Received request for ${request.url}`);
@@ -57,14 +54,17 @@
 //   done(err, newPayload);
 // }
 
+
+
 module.exports = {
-  // onRequest,
   preHandler,
   // onResponse,
   // preSerialization,
   // preParsing,
   // onError,
-  // onSend,
+  // onSend,  
+  // onRequest,
+
 };
 
   

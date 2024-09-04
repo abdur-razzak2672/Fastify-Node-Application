@@ -1,19 +1,13 @@
-// const { Sequelize } = require('sequelize');
-
-// const sequelize = new Sequelize('fastify', 'postgres', '1234', {
-//   host: 'localhost',
-//   dialect: 'postgres',
-// });
-
-// module.exports = sequelize;
 require('dotenv').config();
+
 
 const { Sequelize } = require('sequelize');
 console.log('DB Name:', process.env.DB_NAME);
 console.log('DB User:', process.env.DB_USER);
-console.log('DB Password:', process.env.DB_PASSWORD);  // Make sure this is not undefined or incorrect
+console.log('DB Password:', process.env.DB_PASSWORD);
 console.log('DB Host:', process.env.DB_HOST);
 console.log('DB Port:', process.env.DB_PORT);
+
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -26,5 +20,6 @@ const sequelize = new Sequelize(
     logging: false,
   }
 );
+
 
 module.exports = sequelize;
