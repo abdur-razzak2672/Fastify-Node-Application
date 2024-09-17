@@ -26,7 +26,7 @@ fastify.get('/', async (request, reply) => {
  });
  
  fastify.setErrorHandler(errorHandler);
- fastify.addHook('preHandler', Hooks.preHandler);
+//  fastify.addHook('preHandler', Hooks.preHandler);
  fastify.setErrorHandler(errorHandler);
 
 const port = 5000
